@@ -1,184 +1,182 @@
-<% layout('/layouts/boilerplate') %>
+<% layout('layouts/boilerplate') %>
     <div id="map" style="width: 100%; height: 500px;"></div>
-    <h1>All Campgrounds</h1>
-    <div>
-        <a href="/campgrounds/new">Add Campground</a>
-    </div>
-
-    <% for (let campground of campgrounds) { %>
-        <div class="card mb-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <% if (campground.images && campground.images.length> 0) { %>
-                        <img class="img-fluid" alt="Campground image" src="<%= campground.images[0].url %>">
-                        <% } else { %>
-                            <img class="img-fluid" alt="No Image Available" src="/path/to/default-image.jpg">
-                            <% } %>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= campground.title %>
-                        </h5>
-                        <p class="card-text">
-                            <%= campground.description %>
-                        </p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                <%= campground.location %>
-                            </small>
-                        </p>
-                        <a class="btn btn-primary" href="/campgrounds/<%= campground.id %>">View <%= campground.title %>
-                        </a>
+    <div class="container d-flex flex-column justify-content-center align-items-center my-5" style="min-height: 100vh;">
+        <h1 class="mb-4">All Campgrounds</h1>
+        <div class="row g-4">
+            <% for (let campground of campgrounds) { %>
+                <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem; height: 100%;">
+                        <% if (campground.images && campground.images.length> 0) { %>
+                            <img class="card-img-top" alt="Campground image" src="<%= campground.images[0].url %>"
+                                style="height: 200px; object-fit: cover;">
+                            <% } else { %>
+                                <img class="card-img-top" alt="No Image Available" src="/path/to/default-image.jpg"
+                                    style="height: 200px; object-fit: cover;">
+                                <% } %>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">
+                                            <%= campground.title %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                <%= campground.location %>
+                                            </small>
+                                        </p>
+                                        <a class="btn btn-primary mt-auto" href="/campgrounds/<%= campground.id %>">View
+                                            <%= campground.title %>
+                                        </a>
+                                    </div>
                     </div>
                 </div>
-            </div>
+                <% } %>
         </div>
-        <% } %>
-            <script>
-                // 使用指定的 Mapbox Token
-                mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcnlsbGkiLCJhIjoiY20xd2d6cWV0MGlicjJpb296dHYxdG4wYiJ9.nChyB_MG3kJR4BdxYs-lWQ';
+    </div>
+    <script>
+        // 使用指定的 Mapbox Token
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcnlsbGkiLCJhIjoiY20xd2d6cWV0MGlicjJpb296dHYxdG4wYiJ9.nChyB_MG3kJR4BdxYs-lWQ';
 
-                // 手动构造 campgrounds 的 GeoJSON 数据
-                const campgrounds = {
-                    type: "FeatureCollection",
-                    features: [
+        // 手动构造 campgrounds 的 GeoJSON 数据
+        const campgrounds = {
+            type: "FeatureCollection",
+            features: [
                     <% for(let campground of campgrounds) { %>
-                    {
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [<%= campground.geometry.coordinates.join(', ') %>]  // 直接拼接坐标
-                        },
-                        properties: {
-                            id: "<%= campground._id %>",
-                            title: "<%= campground.title %>",
-                            location: "<%= campground.location %>",
-                            popUpMarkup: `<strong><a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a></strong><p><%= campground.location %></p>`
-                        }
-                    },
+            {
+                type: "Feature",
+                geometry: {
+                    type: "Point",
+                    coordinates: [<%= campground.geometry.coordinates.join(', ') %>]  // 直接拼接坐标
+                },
+                properties: {
+                    id: "<%= campground._id %>",
+                    title: "<%= campground.title %>",
+                    location: "<%= campground.location %>",
+                    popUpMarkup: `<strong><a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a></strong><p><%= campground.location %></p>`
+                }
+            },
                     <% } %>
                 ]
             };
 
-                // 初始化 Mapbox 地图，添加 3D 效果
-                const map = new mapboxgl.Map({
-                    container: 'map',  // 地图容器ID
-                    style: 'mapbox://styles/mapbox/dark-v11',  // 3D 地图样式
-                    center: [-103.59179687498357, 40.66995747013945],  // 地图中心点
-                    zoom: 3,  // 地图缩放级别
-                    pitch: 45,  // 3D 视角倾斜角度
-                    bearing: -17.6,  // 控制地图的旋转方向
-                    antialias: true  // 开启抗锯齿，使 3D 渲染更平滑
-                });
+        // 初始化 Mapbox 地图，添加 3D 效果
+        const map = new mapboxgl.Map({
+            container: 'map',  // 地图容器ID
+            style: 'mapbox://styles/mapbox/dark-v11',  // 3D 地图样式
+            center: [-103.59179687498357, 40.66995747013945],  // 地图中心点
+            zoom: 3,  // 地图缩放级别
+            pitch: 45,  // 3D 视角倾斜角度
+            bearing: -17.6,  // 控制地图的旋转方向
+            antialias: true  // 开启抗锯齿，使 3D 渲染更平滑
+        });
 
-                // 地图加载后执行的操作
-                map.on('load', function () {
-                    // 添加地形图层来渲染 3D 地形
-                    map.addSource('mapbox-dem', {
-                        "type": "raster-dem",
-                        "url": "mapbox://mapbox.terrain-rgb",
-                        "tileSize": 512,
-                        "maxzoom": 14
-                    });
-                    map.setTerrain({ "source": "mapbox-dem", "exaggeration": 1.5 });  // 控制地形的立体感
+        // 地图加载后执行的操作
+        map.on('load', function () {
+            // 添加地形图层来渲染 3D 地形
+            map.addSource('mapbox-dem', {
+                "type": "raster-dem",
+                "url": "mapbox://mapbox.terrain-rgb",
+                "tileSize": 512,
+                "maxzoom": 14
+            });
+            map.setTerrain({ "source": "mapbox-dem", "exaggeration": 1.5 });  // 控制地形的立体感
 
-                    // 添加 3D 建筑物
-                    map.addLayer({
-                        'id': '3d-buildings',
-                        'source': 'composite',
-                        'source-layer': 'building',
-                        'filter': ['==', 'extrude', 'true'],
-                        'type': 'fill-extrusion',
-                        'minzoom': 15,
-                        'paint': {
-                            'fill-extrusion-color': '#aaa',
-                            'fill-extrusion-height': ['get', 'height'],
-                            'fill-extrusion-base': ['get', 'min_height'],
-                            'fill-extrusion-opacity': 0.6
-                        }
-                    });
+            // 添加 3D 建筑物
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-base': ['get', 'min_height'],
+                    'fill-extrusion-opacity': 0.6
+                }
+            });
 
-                    // 添加集群源
-                    map.addSource('campgrounds', {
-                        type: 'geojson',
-                        data: campgrounds,
-                        cluster: true,
-                        clusterMaxZoom: 14,
-                        clusterRadius: 50
-                    });
+            // 添加集群源
+            map.addSource('campgrounds', {
+                type: 'geojson',
+                data: campgrounds,
+                cluster: true,
+                clusterMaxZoom: 14,
+                clusterRadius: 50
+            });
 
-                    // 添加集群图层
-                    map.addLayer({
-                        id: 'clusters',
-                        type: 'circle',
-                        source: 'campgrounds',
-                        filter: ['has', 'point_count'],
-                        paint: {
-                            'circle-color': ['step', ['get', 'point_count'], '#00BCD4', 10, '#2196F3', 30, '#3F51B5'],
-                            'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25]
-                        }
-                    });
+            // 添加集群图层
+            map.addLayer({
+                id: 'clusters',
+                type: 'circle',
+                source: 'campgrounds',
+                filter: ['has', 'point_count'],
+                paint: {
+                    'circle-color': ['step', ['get', 'point_count'], '#00BCD4', 10, '#2196F3', 30, '#3F51B5'],
+                    'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25]
+                }
+            });
 
-                    // 显示集群计数
-                    map.addLayer({
-                        id: 'cluster-count',
-                        type: 'symbol',
-                        source: 'campgrounds',
-                        filter: ['has', 'point_count'],
-                        layout: {
-                            'text-field': '{point_count_abbreviated}',
-                            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                            'text-size': 12
-                        }
-                    });
+            // 显示集群计数
+            map.addLayer({
+                id: 'cluster-count',
+                type: 'symbol',
+                source: 'campgrounds',
+                filter: ['has', 'point_count'],
+                layout: {
+                    'text-field': '{point_count_abbreviated}',
+                    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                    'text-size': 12
+                }
+            });
 
-                    // 显示未集群的点
-                    map.addLayer({
-                        id: 'unclustered-point',
-                        type: 'circle',
-                        source: 'campgrounds',
-                        filter: ['!', ['has', 'point_count']],
-                        paint: {
-                            'circle-color': '#11b4da',
-                            'circle-radius': 4,
-                            'circle-stroke-width': 1,
-                            'circle-stroke-color': '#fff'
-                        }
-                    });
+            // 显示未集群的点
+            map.addLayer({
+                id: 'unclustered-point',
+                type: 'circle',
+                source: 'campgrounds',
+                filter: ['!', ['has', 'point_count']],
+                paint: {
+                    'circle-color': '#11b4da',
+                    'circle-radius': 4,
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#fff'
+                }
+            });
 
-                    // 点击集群进行放大
-                    map.on('click', 'clusters', function (e) {
-                        const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
-                        const clusterId = features[0].properties.cluster_id;
-                        map.getSource('campgrounds').getClusterExpansionZoom(clusterId, function (err, zoom) {
-                            if (err) return;
-                            map.easeTo({
-                                center: features[0].geometry.coordinates,
-                                zoom: zoom
-                            });
-                        });
-                    });
-
-                    // 点击未集群的点显示弹出框
-                    map.on('click', 'unclustered-point', function (e) {
-                        const { popUpMarkup } = e.features[0].properties;
-                        const coordinates = e.features[0].geometry.coordinates.slice();
-                        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                        }
-                        new mapboxgl.Popup()
-                            .setLngLat(coordinates)
-                            .setHTML(popUpMarkup)
-                            .addTo(map);
-                    });
-
-                    // 鼠标悬停改变光标样式
-                    map.on('mouseenter', 'clusters', function () {
-                        map.getCanvas().style.cursor = 'pointer';
-                    });
-                    map.on('mouseleave', 'clusters', function () {
-                        map.getCanvas().style.cursor = '';
+            // 点击集群进行放大
+            map.on('click', 'clusters', function (e) {
+                const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+                const clusterId = features[0].properties.cluster_id;
+                map.getSource('campgrounds').getClusterExpansionZoom(clusterId, function (err, zoom) {
+                    if (err) return;
+                    map.easeTo({
+                        center: features[0].geometry.coordinates,
+                        zoom: zoom
                     });
                 });
-            </script>
+            });
+
+            // 点击未集群的点显示弹出框
+            map.on('click', 'unclustered-point', function (e) {
+                const { popUpMarkup } = e.features[0].properties;
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(popUpMarkup)
+                    .addTo(map);
+            });
+
+            // 鼠标悬停改变光标样式
+            map.on('mouseenter', 'clusters', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+            map.on('mouseleave', 'clusters', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+            map.addControl(new mapboxgl.NavigationControl());
+        });
+    </script>
