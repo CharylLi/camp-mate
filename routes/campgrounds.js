@@ -15,7 +15,7 @@ router.route('/')
 
 
 router.get('/new', isLoggedIn, campgrounds.renderNewForm)
-
+router.get('/map', catchAsync(campgrounds.renderMap));
 router.route('/:id')
     .get(catchAsync(campgrounds.showCampground))
     .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground))
@@ -23,6 +23,7 @@ router.route('/:id')
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm))
 
+// Add a route for the map
 
 
 module.exports = router;

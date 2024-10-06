@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+
+    <div id="map" style="width: 100%; height: 600px;"></div>
+
+    <script>
+        // Use specified Mapbox Token
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcnlsbGkiLCJhIjoiY20xd2d6cWV0MGlicjJpb296dHYxdG4wYiJ9.nChyB_MG3kJR4BdxYs-lWQ';
+
+        // Create campgrounds GeoJSON data
+        const campgrounds = {
+            type: "FeatureCollection",
+            features: [
+            <% for(let campground of campgrounds) { %>
+            {
+                type: "Feature",
+                geometry: {
+                    type: "Point",
+                    coordinates: [<%= campground.geometry.coordinates.join(', ') %>]
+                },
+                properties: {
+                    id: "<%= campground._id %>",
+                    title: "<%= campground.title %>",
+                    location: "<%= campground.location %>",
+                    popUpMarkup: `<strong><a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a></strong><p><%= campground.location %></p>`
+                }
+            },
+            <% } %>
+        ]
+    };
+
+        // Initialize the Mapbox map with 3D effect
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v11',
+            center: [-103.59179687498357, 40.66995747013945],
+            zoom: 3,
+            pitch: 45,
+            bearing: -17.6,
+            antialias: true
+        });
+
+        map.on('load', function () {
+            // Add the map features and clusters here...
+            map.addSource('campgrounds', {
+                type: 'geojson',
+                data: campgrounds,
+                cluster: true,
+                clusterMaxZoom: 14,
+                clusterRadius: 50
+            });
+
+            map.addLayer({
+                id: 'clusters',
+                type: 'circle',
+                source: 'campgrounds',
+                filter: ['has', 'point_count'],
+                paint: {
+                    'circle-color': ['step', ['get', 'point_count'], '#00BCD4', 10, '#2196F3', 30, '#3F51B5'],
+                    'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25]
+                }
+            });
+
+            // Add more layers (cluster-count, unclustered-point, popups, etc.) here...
+
+            map.addControl(new mapboxgl.NavigationControl());
+        });
+    </script>

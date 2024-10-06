@@ -2,7 +2,6 @@
 .navbar {
     background-color: #112D4E;
     padding: 0.5rem 0.5rem;
-    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;  /* Vertically center items */
 }
@@ -43,8 +42,8 @@
     background-color: #7C93C3;
     font-family: 'PT Sans', sans-serif;
     border-color: #7C93C3;
-    
 }
+
 
 .btn-primary:hover {
     background-color: #19385c;
@@ -57,16 +56,19 @@ h1, h2, h3, h4, h5, h6 {
     color: #4563a2;  /* Apply medium blue to headings */
 }
 
-/* Footer styling */
 footer {
-    background-color: #112D4E;  /* Dark blue */
+    background-color: #0b1026;  /* Dark blue */
     color: #F9F7F7;  /* Light background color */
-    padding: 1rem;
+    padding: 0;  /* Remove default padding */
     text-align: center;
     font-family: 'PT Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Vertically center text in the footer */
+    height: 40px;  /* Set a consistent height for the footer */
 }
 
-/* Container padding */
-.container, .row {
-    margin-bottom: 1rem;
+#map {
+    flex-grow: 1; /* Make the map grow to fill the remaining space */
 }
+

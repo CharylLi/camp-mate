@@ -14,6 +14,17 @@ module.exports.renderNewForm = (req, res) => {
     res.render('campgrounds/new');
 }
 
+module.exports.renderMap = async (req, res) => {
+    try {
+        const campgrounds = await Campground.find({});
+        res.render('campgrounds/map', { campgrounds });
+    } catch (err) {
+        console.error('Error fetching campgrounds for map:', err);
+        req.flash('error', 'Something went wrong');
+        return res.redirect('/campgrounds');
+    }
+}
+
 module.exports.createCampground = async (req, res, next) => {
     try {
         // Use the location input from the form

@@ -15,16 +15,16 @@
     <!-- Fancy Navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-gradient-dark shadow-lg">
         <div class="container">
-            <a class="navbar-brand font-weight-bold" href="/">CampMate</a> <!-- Make the brand link to homepage -->
+            <a class="navbar-brand font-weight-bold" href="/">CampMate</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <!-- Remove the "Home" link -->
                     <a class="nav-item nav-link" href="/campgrounds">Campgrounds</a>
                     <a class="nav-item nav-link" href="/campgrounds/new">New</a>
+                    <a class="nav-item nav-link" href="/campgrounds/map">Map</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <% if(!currentUser) { %>
