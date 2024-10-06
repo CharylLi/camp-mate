@@ -1,0 +1,72 @@
+/* Overall Navbar styling */
+.navbar {
+    background-color: #112D4E;
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;  /* Vertically center items */
+}
+
+/* Navbar brand - make CampMate link back to the homepage */
+.navbar-brand {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #F9F7F7;
+    line-height: 1.5rem;
+    text-decoration: none;  /* Remove underline from CampMate link */
+}
+
+/* Navbar link styling */
+.navbar-nav .nav-link {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;  /* Add more left margin */
+    color: #F9F7F7;
+    display: flex;
+    align-items: center;  /* Vertically center the text in links */
+    text-decoration: none;  /* Remove underline */
+}
+
+/* Navbar link hover effects (no underline) */
+.navbar-nav .nav-link:hover {
+    color: #DBE2EF;  /* Color change on hover */
+}
+
+/* Active link styling (no underline) */
+.navbar-nav .nav-link.active {
+    color: #3F72AF;
+}
+
+/* Button colors */
+.btn-primary {
+    background-color: #7C93C3;
+    font-family: 'PT Sans', sans-serif;
+    border-color: #7C93C3;
+    
+}
+
+.btn-primary:hover {
+    background-color: #19385c;
+    border-color: #7C93C3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bold;
+    color: #4563a2;  /* Apply medium blue to headings */
+}
+
+/* Footer styling */
+footer {
+    background-color: #112D4E;  /* Dark blue */
+    color: #F9F7F7;  /* Light background color */
+    padding: 1rem;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+}
+
+/* Container padding */
+.container, .row {
+    margin-bottom: 1rem;
+}
