@@ -35,6 +35,7 @@ const app = express();
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // Middleware to parse form data, use method override for PUT/DELETE, and serve static files
 app.use(
