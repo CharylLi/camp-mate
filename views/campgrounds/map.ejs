@@ -32,8 +32,8 @@
         const map = new mapboxgl.Map({
             container: 'map',  // 地图容器ID
             style: 'mapbox://styles/mapbox/light-v11',  // 3D 地图样式
-            center: [-103.59179687498357, 40.66995747013945],  // 地图中心点
-            zoom: 4,  // 地图缩放级别
+            center: [-95.59179687498357, 37.66995747013945],  // 地图中心点
+            zoom: 3.3,  // 地图缩放级别
             antialias: true  // 开启抗锯齿，使 3D 渲染更平滑
         });
 
@@ -80,7 +80,7 @@
                 source: 'campgrounds',
                 filter: ['has', 'point_count'],
                 paint: {
-                    'circle-color': ['step', ['get', 'point_count'], '#00BCD4', 10, '#2196F3', 30, '#3F51B5'],
+                    'circle-color': ['step', ['get', 'point_count'], '#00BCD4', 3, '#2196F3', 6, '#3F51B5'],
                     'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25]
                 }
             });

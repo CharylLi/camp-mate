@@ -186,3 +186,10 @@ footer {
     opacity: 0;
     transition: opacity 1s ease-out;
 }
+
+@media (max-width: 576px) {
+    .card {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+}

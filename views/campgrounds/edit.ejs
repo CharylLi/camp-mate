@@ -12,6 +12,7 @@
                         <input class="form-control" type="text" id="title" name="campground[title]"
                             value="<%= campground.title %>" required>
                         <div class="invalid-feedback">Title is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
 
                     <div class="mb-3">
@@ -29,6 +30,7 @@
                                 aria-describedby="price-label" name="campground[price]" value="<%=campground.price %>"
                                 required>
                             <div class="invalid-feedback">Price is required and must be a positive number.</div>
+                            <div class="valid-feedback">Looks good!</div>
                         </div>
                     </div>
 
@@ -37,7 +39,16 @@
                         <textarea class="form-control" id="description" name="campground[description]" rows="4"
                             required><%= campground.description %></textarea>
                         <div class="invalid-feedback">Description is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="website">Website</label>
+                        <input class="form-control" type="url" id="website" name="campground[website]"
+                            value="<%= campground.website %>" placeholder="https://example.com" required>
+                        <div class="invalid-feedback">Website is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
 
                     <div class="mb-5">
                         <label for="formFileMultiple" class="form-label">Add more image(s)</label>
@@ -45,7 +56,7 @@
                     </div>
 
                     <!-- Display Existing Images with Delete Option -->
-                    <div class="mb-5">
+                    <div class="mb-3">
                         <label class="form-label">Existing Images</label>
                         <div class="d-flex flex-wrap">
                             <% campground.images.forEach(function(img, i) { %>
@@ -66,7 +77,7 @@
                     </div>
                 </form>
 
-                <div class="text-center">
+                <div class="text-center mb-4">
                     <a href="/campgrounds/<%= campground._id %>">Back to Campground</a>
                 </div>
             </div>

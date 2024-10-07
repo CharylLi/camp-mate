@@ -4,11 +4,11 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-6">
-                <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="campgroundCarousel" class="carousel slide">
                     <div class="carousel-inner">
                         <% campground.images.forEach((img, i)=> { %>
                             <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-                                <img src="<%= img.url %>" class="d-block w-100" alt="Campground Image"
+                                <img src="<%= img.url %>" class="d-block w-100" alt="Campground Image" loading="lazy"
                                     style="aspect-ratio: 4 / 3; object-fit: cover;">
                             </div>
                             <% }) %>
@@ -44,20 +44,23 @@
                                     yet</p>
                                 <% } %>
 
-                                    <p class="card-text">
-                                        <%= campground.description %>
-                                    </p>
+                                    <% if (campground.website) { %>
+                                        <p><a href="<%= campground.website %>" target="_blank"
+                                                rel="noopener noreferrer">Visit their website</a></p>
+                                        <% } %>
+
+                                            <p class="card-text">
+                                                <%- campground.description %>
+                                            </p>
                     </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item text-muted" style="font-size: 1rem;">
                             <%= campground.location %>
                         </li>
-                        <li class="list-group-item">
-                            Submitted by <%= campground.author.username %>
-                        </li>
-                        <li class="list-group-item">
-                            $<%= campground.price %>/night
+
+                        <li class="list-group-item">Starting at
+                            $<%= campground.price %> / night
                         </li>
                     </ul>
 
@@ -72,8 +75,10 @@
                         <% } %>
 
                             <div class="card-footer text-muted">
-                                Created on <%= new Date(campground.createdAt).toLocaleDateString('en-US', {
-                                    month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                Created by <%= campground.author.username %> on <%= new
+                                        Date(campground.createdAt).toLocaleDateString('en-US', { month: 'short' ,
+                                        day: 'numeric' , year: 'numeric' }) %>
+                                        </li>
                             </div>
                 </div>
             </div>
@@ -115,7 +120,7 @@
                     <% } %>
 
                         <% for (let review of campground.reviews) { %>
-                            <div class="card mb-3">
+                            <div class="card mt-3">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <%= review.author.username %>
@@ -123,7 +128,7 @@
                                     <p class="starability-result" data-rating="<%= review.rating %>">
                                         Rated: <%= review.rating %> stars
                                     </p>
-                                    <p class="card-text" style="font-size: 1.2rem;">
+                                    <p class="card-text" style="font-size: 1.0rem;">
                                         <%= review.body %>
                                     </p>
                                     <% if (currentUser && review.author.equals(currentUser._id)) { %>
@@ -141,6 +146,7 @@
     </div>
 
     <script>
+
         const coordinates = [<%= campground.geometry.coordinates.join(', ') %>];
 
         // Initialize Mapbox

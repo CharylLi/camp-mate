@@ -74,9 +74,10 @@ module.exports.createCampground = async (req, res, next) => {
         const campground = new Campground(req.body.campground);
         campground.geometry = geoData.body.features[0].geometry;
 
-        // Add images and author
+        // Add images, website, and author
         campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
         campground.author = req.user._id;
+        campground.website = req.body.campground.website;  // Add website from the form
 
         // Save the campground to the database
         await campground.save();
@@ -120,17 +121,26 @@ module.exports.updateCampground = async (req, res) => {
     const { id } = req.params;
     console.log(req.body);
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
+
+    // Handle image uploads
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.images.push(...imgs);
+
+    // Update website
+    campground.website = req.body.campground.website;  // Update the website field
+
     await campground.save();
+
+    // Handle image deletions
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
             await cloudinary.uploader.destroy(filename);
         }
-        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
     }
+
     req.flash('success', 'Successfully updated campground!');
-    res.redirect(`/campgrounds/${campground._id}`)
+    res.redirect(`/campgrounds/${campground._id}`);
 };
 
 module.exports.deleteCampground = async (req, res) => {

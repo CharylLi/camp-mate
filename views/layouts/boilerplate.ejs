@@ -37,16 +37,10 @@
                             // 获取所有的 alert 元素
                             var alerts = document.querySelectorAll('.alert');
 
-                            // 遍历每个 alert，并设置2秒后自动淡出
+                            // 保留 alert，不自动消失，用户需要手动关闭
                             alerts.forEach(function (alert) {
-                                setTimeout(function () {
-                                    alert.classList.add('fade-out'); // 添加淡出效果
-                                }, 2000); // 2秒后开始淡出
-
-                                // 在淡出动画结束后彻底移除 alert 元素
-                                setTimeout(function () {
-                                    alert.style.display = 'none';
-                                }, 3000); // 在淡出动画结束后移除元素
+                                // 不添加任何 setTimeout 或 fade-out 逻辑
+                                // 保留 alert，直到用户手动关闭
                             });
                         });
                     </script>

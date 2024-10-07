@@ -38,6 +38,7 @@ const CampgroundSchema = new Schema({
             ref: 'Review'
         }
     ],
+    website: String,
     averageRating: {  // New field for storing average rating
         type: Number,
         default: 0

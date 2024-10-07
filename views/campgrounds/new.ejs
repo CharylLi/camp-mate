@@ -10,6 +10,7 @@
                         <label class="form-label" for='title'>Title</label>
                         <input class="form-control" type="text" id="title" name="campground[title]" required>
                         <div class="invalid-feedback">Title is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
 
                     <div class="mb-3">
@@ -25,6 +26,7 @@
                             <input type="number" class="form-control" id="price" placeholder="0.00" aria-label="price"
                                 aria-describedby="price-label" name="campground[price]" required>
                             <div class="invalid-feedback">Price is required and must be a positive number.</div>
+                            <div class="valid-feedback">Looks good!</div>
                         </div>
                     </div>
 
@@ -33,18 +35,26 @@
                         <textarea class="form-control" id="description" name="campground[description]" rows="4"
                             required></textarea>
                         <div class="invalid-feedback">Description is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
-
-                    <div class="mb-5">
+                    <div class="mb-3">
+                        <label class="form-label" for="website">Website</label>
+                        <input class="form-control" type="url" id="website" name="campground[website]"
+                            placeholder="https://example.com" required>
+                        <div class="invalid-feedback">Website is required.</div>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="mb-4">
                         <label for="formFileMultiple" class="form-label">Upload Images</label>
                         <input class="form-control" type="file" id="formFileMultiple" name="image" multiple>
+
                     </div>
 
                     <div class="mb-3 text-center">
                         <button class="btn btn-success" type="submit">Add Campground</button>
                     </div>
                 </form>
-                <div class="text-center">
+                <div class="text-center mb-4">
                     <a href="/campgrounds">Back to All Campgrounds</a>
                 </div>
             </div>
