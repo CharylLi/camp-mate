@@ -6,9 +6,34 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 
 module.exports.index = async (req, res) => {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds })
-}
+    const { search, sort } = req.query;
+    let campgrounds = await Campground.find({});
+
+    // Handle search by title or location
+    if (search) {
+        campgrounds = await Campground.find({
+            $or: [
+                { title: new RegExp(search, 'i') },  // Search by title (case-insensitive)
+                { location: new RegExp(search, 'i') }  // Search by location (case-insensitive)
+            ]
+        });
+    }
+
+    // Handle sorting
+    if (sort === 'alphabetic') {
+        campgrounds = campgrounds.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sort === 'most-reviews') {
+        campgrounds = campgrounds.sort((a, b) => b.reviews.length - a.reviews.length);
+    } else if (sort === 'highest-rating') {
+        campgrounds = campgrounds.sort((a, b) => b.averageRating - a.averageRating);
+    } else if (sort === 'price-low-to-high') {
+        campgrounds = campgrounds.sort((a, b) => a.price - b.price);
+    } else if (sort === 'price-high-to-low') {
+        campgrounds = campgrounds.sort((a, b) => b.price - a.price);
+    }
+
+    res.render('campgrounds/index', { campgrounds, search, sort });
+};
 
 module.exports.renderNewForm = (req, res) => {
     res.render('campgrounds/new');

@@ -29,12 +29,29 @@
 
 /* Navbar link hover effects (no underline) */
 .navbar-nav .nav-link:hover {
-    color: #DBE2EF;  /* Color change on hover */
+    color: #ffffff;  /* Color change on hover */
 }
 
 /* Active link styling (no underline) */
 .navbar-nav .nav-link.active {
     color: #3F72AF;
+}
+
+.alert {
+    display: block !important;  /* 确保 alert 是可见的 */
+    visibility: visible !important;
+}
+
+.btn-search {
+    background-color: #31447c;
+    border-color: #31447c;
+    color: white;
+}
+
+.btn-search:hover {
+    background-color: #19385c; /* 鼠标悬停时的颜色 */
+    border-color: #19385c;
+    color: white;
 }
 
 /* Button colors */
@@ -44,16 +61,61 @@
     border-color: #7C93C3;
 }
 
-
 .btn-primary:hover {
     background-color: #19385c;
-    border-color: #7C93C3;
+    border-color: #19385c;
+}
+
+/* Default success button styling */
+.btn-success {
+    background-color: #55679C;
+    border-color: #55679C;
+    color: white;
+}
+
+/* Hover effect for success button */
+.btn-success:hover {
+    background-color: #394a7d;
+    border-color: #394a7d;
+    color: white;
+}
+
+/* Default danger button styling */
+.btn-danger {
+    background-color: #31447c;
+    border-color: #31447c;
+    color: white;
+}
+
+/* Hover effect for danger button */
+.btn-danger:hover {
+    background-color: #19385c;
+    border-color: #19385c;
+    color: white;
+}
+
+/* Default info button styling */
+.btn-info {
+    background-color: #55679C;
+    border-color: #55679C;
+    color: white;
+}
+
+/* Hover effect for info button */
+.btn-info:hover {
+    background-color: #394a7d;
+    border-color: #394a7d;
+    color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'PT Sans', sans-serif;
     font-weight: bold;
     color: #4563a2;  /* Apply medium blue to headings */
+}
+
+body {
+    font-family: 'PT Sans', sans-serif;
 }
 
 footer {
@@ -72,3 +134,55 @@ footer {
     flex-grow: 1; /* Make the map grow to fill the remaining space */
 }
 
+.alert-custom {
+    position: fixed;
+    top: 50px; /* 调整位置到页面稍微靠下 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 90%; /* 调整为更宽 */
+    max-width: 800px; /* 更大的最大宽度 */
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.95; /* 降低透明度 */
+}
+
+/* 修改颜色 */
+.alert-success {
+    background-color: rgba(124, 147, 195, 0.85); /* 设置背景颜色和透明度 */
+    color: white;
+    border: none;
+}
+
+.alert-danger {
+    background-color: rgba(49, 68, 124, 0.85); /* 设置背景颜色和透明度 */
+    color: white;
+    border: none;
+}
+
+/* 使关闭按钮与配色方案匹配 */
+.alert .btn-close {
+    filter: invert(1); /* 将关闭按钮的颜色设置为白色 */
+}
+
+/* 淡出效果 */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* 当添加 fade-out 类时，启动动画 */
+.fade-out {
+    animation: fadeOut 1s forwards; /* 1秒的淡出动画 */
+}
+
+/* 让元素在隐藏后不占空间 */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}

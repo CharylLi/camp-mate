@@ -1,47 +1,52 @@
-<% layout('/layouts/boilerplate')%>
-    <div class="row">
-        <h1 class="text-center">New Campground</h1>
-        <div class="col-6 offset-3">
-            <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label class="form-label" for='title'>Title</label>
-                    <input class="form-control" type="text" id="title" name="campground[title]" required>
-                    <div class="invalid-feedback">Title is required.</div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="location">Location</label>
-                    <input class="form-control" type="text" id="location" name="campground[location]" required>
-                    <div class="valid-feedback">
-                        Looks good!
+<% layout('/layouts/boilerplate') %>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-4" style="font-family: 'PT Sans', sans-serif; font-size: 2rem;">New Campground
+            </h1>
+            <div class="col-6 offset-3">
+                <form action="/campgrounds" method="POST" novalidate class="validated-form"
+                    enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for='title'>Title</label>
+                        <input class="form-control" type="text" id="title" name="campground[title]" required>
+                        <div class="invalid-feedback">Title is required.</div>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for='price'>Price</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="price-label">$</span>
-                        <input type="number" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                            aria-describedby="price-label" name="campground[price]" required>
-                        <div class="invalid-feedback">Price is required and must be a positive number.</div>
+                    <div class="mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <input class="form-control" type="text" id="location" name="campground[location]" required>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for='description'>Description</label>
-                    <textarea class="form-control" id="description" name="campground[description]" required></textarea>
-                    <div class="invalid-feedback">Description is required.</div>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for='price'>Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="price-label">$</span>
+                            <input type="number" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                                aria-describedby="price-label" name="campground[price]" required>
+                            <div class="invalid-feedback">Price is required and must be a positive number.</div>
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Upload Images</label>
-                    <input class="form-control" type="file" id="formFileMultiple" name="image" multiple>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for='description'>Description</label>
+                        <textarea class="form-control" id="description" name="campground[description]" rows="4"
+                            required></textarea>
+                        <div class="invalid-feedback">Description is required.</div>
+                    </div>
 
-                <div class="mb-3">
-                    <button class="btn btn-success" type="submit">Add Campground</button>
+                    <div class="mb-5">
+                        <label for="formFileMultiple" class="form-label">Upload Images</label>
+                        <input class="form-control" type="file" id="formFileMultiple" name="image" multiple>
+                    </div>
+
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-success" type="submit">Add Campground</button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="/campgrounds">Back to All Campgrounds</a>
                 </div>
-            </form>
-            <a href="/campgrounds">Back to All Campgrounds</a>
+            </div>
         </div>
     </div>

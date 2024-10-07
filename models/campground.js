@@ -37,7 +37,15 @@ const CampgroundSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
-    ]
+    ],
+    averageRating: {  // New field for storing average rating
+        type: Number,
+        default: 0
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) {

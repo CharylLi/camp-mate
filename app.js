@@ -64,9 +64,7 @@ const store = MongoStore.create({
     }
 });
 
-store.on("error", function (e) {
-    console.log("SESSION STORE ERROR", e)
-})
+
 
 app.use(session(sessionConfig))
 app.use(flash());

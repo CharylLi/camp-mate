@@ -6,34 +6,64 @@
             style="font-size: 3rem; font-weight: bold;">All Campgrounds</h1>
     </div>
 
+    <div class="container d-flex justify-content-between align-items-center my-4">
+        <!-- Sorting Dropdown -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="background-color: #31447c; border-color: #31447c; color: white; font-family: 'PT Sans', sans-serif;">
+                Sort By
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/campgrounds?sort=alphabetic">Alphabetic</a></li>
+                <li><a class="dropdown-item" href="/campgrounds?sort=most-reviews">Most Reviews</a></li>
+                <li><a class="dropdown-item" href="/campgrounds?sort=highest-rating">Highest Rating</a></li>
+                <li><a class="dropdown-item" href="/campgrounds?sort=price-low-to-high">Price: Low to High</a></li>
+                <li><a class="dropdown-item" href="/campgrounds?sort=price-high-to-low">Price: High to Low</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Form -->
+        <form class="d-flex justify-content-end" action="/campgrounds" method="GET"
+            style="flex-grow: 1; max-width: 600px;">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search by name or location"
+                value="<%= search || '' %>" style="flex-grow: 1; min-width: 250px; font-family: 'PT Sans', sans-serif;">
+            <button class="btn btn-search" type="submit" style="font-family: 'PT Sans', sans-serif;">Search</button>
+        </form>
+    </div>
 
     <div class="container d-flex flex-column justify-content-center align-items-center my-5" style="min-height: 100vh;">
-        <div class="row g-3">
-            <% for (let campground of campgrounds) { %>
-                <div class="col-lg-4 col-md-6 d-flex justify-content-center">
-                    <div class="card" style="width: 17rem; height: 100%;">
-                        <% if (campground.images && campground.images.length> 0) { %>
-                            <img class="card-img-top" alt="Campground image" src="<%= campground.images[0].url %>"
-                                style="height: 200px; object-fit: cover;">
-                            <% } else { %>
-                                <img class="card-img-top" alt="No Image Available" src="/path/to/default-image.jpg"
+        <% if (campgrounds.length> 0) { %>
+            <div class="row g-5 d-flex justify-content-start">
+                <% for (let campground of campgrounds) { %>
+                    <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+                        <div class="card" style="min-width: 17rem; width: 17rem; max-height: 350px; height: 100%;">
+                            <% if (campground.images && campground.images.length> 0) { %>
+                                <img class="card-img-top" alt="Campground image" src="<%= campground.images[0].url %>"
                                     style="height: 200px; object-fit: cover;">
-                                <% } %>
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">
-                                            <%= campground.title %>
-                                        </h5>
-                                        <p class="card-text">
-                                            <small class="text-muted">
-                                                <%= campground.location %>
-                                            </small>
-                                        </p>
-                                        <a class="btn btn-primary mt-auto" href="/campgrounds/<%= campground.id %>">View
-                                            <%= campground.title %>
-                                        </a>
-                                    </div>
+                                <% } else { %>
+                                    <img class="card-img-top" alt="No Image Available" src="/path/to/default-image.jpg"
+                                        style="height: 200px; object-fit: cover;">
+                                    <% } %>
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">
+                                                <%= campground.title %>
+                                            </h5>
+                                            <p class="card-text"><small class="text-muted">
+                                                    <%= campground.location %>
+                                                </small></p>
+                                            <a class="btn btn-primary mt-auto"
+                                                href="/campgrounds/<%= campground.id %>">View <%= campground.title %>
+                                            </a>
+                                        </div>
+                        </div>
                     </div>
+                    <% } %>
+            </div>
+            <% } else { %>
+                <!-- No results found section with reduced margin -->
+                <div class="col-12 text-center mt-3">
+                    <p class="text-muted">No campgrounds match your search. Try different keywords or sort options.</p>
                 </div>
                 <% } %>
-        </div>
     </div>
