@@ -5,16 +5,16 @@ const Campground = require('../models/campground');
 
 mongoose.connect('mongodb://localhost:27017/camp-mate', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log('Database connected');
 });
 
-const sample = array => array[Math.floor(Math.random() * array.length)];
+const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
@@ -26,24 +26,21 @@ const seedDB = async () => {
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             geometry: {
-                type: "Point",
-                coordinates: [
-                    cities[random1000].longitude,
-                    cities[random1000].latitude,
-                ]
+                type: 'Point',
+                coordinates: [cities[random1000].longitude, cities[random1000].latitude],
             },
             images: [
                 {
                     url: 'https://res.cloudinary.com/dpo1w1vop/image/upload/v1728063191/CampMate/m3vzfdvefacvuwmwi79m.png',
-                    filename: 'CampMate/m3vzfdvefacvuwmwi79m'
+                    filename: 'CampMate/m3vzfdvefacvuwmwi79m',
                 },
             ],
             description: 'description',
-            price
-        })
+            price,
+        });
         await camp.save();
     }
-}
+};
 
 seedDB().then(() => {
     mongoose.connection.close();

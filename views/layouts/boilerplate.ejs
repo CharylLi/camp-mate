@@ -1,3 +1,5 @@
+<!-- This is the main boilerplate layout for the application, including the navbar, flash messages, dynamic content, and 
+ footer. It also links to external stylesheets, scripts (Bootstrap, Mapbox), and local scripts. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,14 +36,9 @@
                     <script src="/javascripts/validateForms.js"></script>
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
-                            // 获取所有的 alert 元素
                             var alerts = document.querySelectorAll('.alert');
 
-                            // 保留 alert，不自动消失，用户需要手动关闭
-                            alerts.forEach(function (alert) {
-                                // 不添加任何 setTimeout 或 fade-out 逻辑
-                                // 保留 alert，直到用户手动关闭
-                            });
+                            alerts.forEach(function (alert) { });
                         });
                     </script>
 </body>

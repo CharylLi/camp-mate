@@ -1,3 +1,4 @@
+<!-- Basic HTML structure with Bootstrap styling. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +8,11 @@
     <title>CampMate</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/main.css"> <!-- Custom CSS for fancy styles -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
 <body>
 
-    <!-- Fancy Navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-gradient-dark shadow-lg">
         <div class="container">
             <a class="navbar-brand font-weight-bold" href="/">CampMate</a>
@@ -25,6 +25,7 @@
                     <a class="nav-item nav-link" href="/campgrounds">Campgrounds</a>
                     <a class="nav-item nav-link" href="/campgrounds/new">New</a>
                     <a class="nav-item nav-link" href="/campgrounds/map">Map</a>
+                    <a class="nav-item nav-link" href="/campgrounds/about">About</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <% if(!currentUser) { %>

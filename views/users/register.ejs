@@ -1,45 +1,46 @@
-<% layout('layouts/boilerplate') %>
+<%# User register page %>
+    <% layout('layouts/boilerplate') %>
 
-    <!-- 引入公共样式 -->
-    <link rel="stylesheet" href="/stylesheets/auth.css">
+        <link rel="stylesheet" href="/stylesheets/auth.css">
 
-    <style>
-        /* 注册页面的背景图片 */
-        body {
-            background-image: url('https://res.cloudinary.com/dpo1w1vop/image/upload/v1728256000/login_background_dzlrw1.jpg');
-        }
-    </style>
+        <style>
+            body {
+                background-image: url('https://res.cloudinary.com/dpo1w1vop/image/upload/v1728256000/login_background_dzlrw1.jpg');
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+            }
+        </style>
 
-    <!-- 半透明背景层 -->
-    <div class="background-overlay"></div>
+        <div class="background-overlay"></div>
 
-    <div class="container d-flex justify-content-center align-items-center h-100 card-container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-                <div class="card shadow overlay">
-                    <div class="card-body">
-                        <h5 class="card-title">Register</h5>
-                        <form action="/register" method="POST" class="validated-form" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label" for="username">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" required
-                                    autofocus>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="email">Email</label>
-                                <input class="form-control" type="email" id="email" name="email" required>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="password">Password</label>
-                                <input class="form-control" type="password" id="password" name="password" required>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                            <button class="btn btn-register btn-block">Register</button>
-                        </form>
+        <div class="container d-flex justify-content-center align-items-center h-100 card-container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+                    <div class="card shadow overlay">
+                        <div class="card-body">
+                            <h5 class="card-title">Register</h5>
+                            <form action="/register" method="POST" class="validated-form" novalidate>
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input class="form-control" type="text" id="username" name="username" required
+                                        autofocus>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" name="email" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input class="form-control" type="password" id="password" name="password" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <button class="btn btn-register btn-block">Register</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>

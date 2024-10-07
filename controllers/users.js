@@ -5,7 +5,7 @@ const User = require('../models/user.js');
 // Renders the registration page for new users.
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
-}
+};
 
 // Registers a new user, handles errors, and logs the user in upon successful registration.
 module.exports.register = async (req, res) => {
@@ -13,11 +13,11 @@ module.exports.register = async (req, res) => {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
-        req.login(registeredUser, err => {
+        req.login(registeredUser, (err) => {
             if (err) return next(err);
-            req.flash('success', 'Welcome to Yelp Camp!');
+            req.flash('success', 'Welcome to CampMate!');
             res.redirect('/campgrounds');
-        })
+        });
     } catch (e) {
         req.flash('error', e.message);
         res.redirect('register');

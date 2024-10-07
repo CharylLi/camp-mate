@@ -1,5 +1,5 @@
 // This schema defines the structure of the Campground model in the MongoDB database using Mongoose.
-// It includes fields and a virtual property for generating image thumbnails and a post-middleware 
+// It includes fields and a virtual property for generating image thumbnails and a post-middleware
 // hook for deleting reviews when a campground is deleted.
 const mongoose = require('mongoose');
 const Review = require('./review');
@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema({
     url: String,
-    filename: String
+    filename: String,
 });
 
 // Generates a smaller thumbnail version of the image URL.
@@ -22,35 +22,36 @@ const CampgroundSchema = new Schema({
         type: {
             type: String,
             enum: ['Point'],
-            required: true
+            required: true,
         },
         coordinates: {
             type: [Number],
-            required: true
-        }
+            required: true,
+        },
     },
     price: Number,
     description: String,
     location: String,
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     },
     reviews: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
+            ref: 'Review',
+        },
     ],
     website: String,
-    averageRating: {  // New field for storing average rating
+    averageRating: {
+        // New field for storing average rating
         type: Number,
-        default: 0
+        default: 0,
     },
     createdAt: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
 // After a campground is deleted, this hook deletes all associated reviews.
@@ -58,9 +59,9 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
         await Review.deleteMany({
             _id: {
-                $in: doc.reviews
-            }
-        })
+                $in: doc.reviews,
+            },
+        });
     }
 });
 

@@ -1,7 +1,18 @@
+<!-- Displays success or error alerts with dismiss buttons. -->
 <!-- Success Alert -->
 <% if(success && success.length) { %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert"
-        style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1050; width: 80%; max-width: 900px; margin: 0 auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert" style="
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  ">
         <%= success %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -9,9 +20,35 @@
 
         <!-- Error Alert -->
         <% if(error && error.length) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1050; width: 80%; max-width: 900px; margin: 0 auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert" style="
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  ">
                 <%= error %>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <% } %>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var successAlert = document.getElementById("success-alert");
+
+                        if (successAlert) {
+                            setTimeout(function () {
+                                successAlert.classList.add("fade-out");
+                            }, 2000);
+
+                            setTimeout(function () {
+                                successAlert.style.display = "none";
+                            }, 3000);
+                        }
+                    });
+                </script>

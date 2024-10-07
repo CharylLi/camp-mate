@@ -1,42 +1,43 @@
-<% layout('layouts/boilerplate') %>
+<%# User login page %>
+    <% layout('layouts/boilerplate') %>
 
-    <!-- 引入公共样式 -->
-    <link rel="stylesheet" href="/stylesheets/auth.css">
+        <link rel="stylesheet" href="/stylesheets/auth.css">
 
-    <style>
-        /* 登录页面的背景图片 */
-        body {
-            background-image: url('https://res.cloudinary.com/dpo1w1vop/image/upload/v1728263531/background1_x0bffp.jpg');
-        }
-    </style>
+        <style>
+            body {
+                background-image: url('https://res.cloudinary.com/dpo1w1vop/image/upload/v1728263531/background1_x0bffp.jpg');
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+            }
+        </style>
 
-    <!-- 半透明背景层 -->
-    <div class="background-overlay"></div>
+        <div class="background-overlay"></div>
 
-    <div class="container d-flex justify-content-center align-items-center h-100 card-container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-                <div class="card shadow overlay">
-                    <div class="card-body">
-                        <h5 class="card-title">Login</h5>
-                        <form action="/login" method="POST" class="validated-form" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label" for="username">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" autofocus
-                                    required>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
+        <div class="container d-flex justify-content-center align-items-center h-100 card-container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+                    <div class="card shadow overlay">
+                        <div class="card-body">
+                            <h5 class="card-title">Login</h5>
+                            <form action="/login" method="POST" class="validated-form" novalidate>
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input class="form-control" type="text" id="username" name="username" autofocus
+                                        required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" for="password">Password</label>
-                                <input class="form-control" type="password" id="password" name="password" required>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input class="form-control" type="password" id="password" name="password" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
 
-                            <button class="btn btn-login btn-block">Login</button>
-                        </form>
+                                <button class="btn btn-login btn-block">Login</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>

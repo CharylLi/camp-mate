@@ -1,3 +1,4 @@
+// This file defines routes for handling campground-related actions
 const express = require('express');
 const router = express.Router();
 const campgrounds = require('../controllers/campgrounds');
@@ -7,23 +8,40 @@ const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 
-const Campground = require('../models/campground');
-
-router.route('/')
+// Route to list all campgrounds and create a new campground
+router
+    .route('/')
     .get(catchAsync(campgrounds.index))
-    .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.createCampground))
+    .post(
+        isLoggedIn,
+        upload.array('image'),
+        validateCampground,
+        catchAsync(campgrounds.createCampground)
+    );
 
+// Route to render the form to create a new campground
+router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
-router.get('/new', isLoggedIn, campgrounds.renderNewForm)
+// Route to render the "About" page
+router.get('/about', campgrounds.renderAboutPage);
+
+// Route to render the interactive map of campgrounds
 router.get('/map', catchAsync(campgrounds.renderMap));
-router.route('/:id')
+
+// Route to show, update, or delete a specific campground by ID
+router
+    .route('/:id')
     .get(catchAsync(campgrounds.showCampground))
-    .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground))
+    .put(
+        isLoggedIn,
+        isAuthor,
+        upload.array('image'),
+        validateCampground,
+        catchAsync(campgrounds.updateCampground)
+    )
     .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
 
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm))
-
-// Add a route for the map
-
+// Route to render the form to edit a campground
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
 
 module.exports = router;

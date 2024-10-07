@@ -4,7 +4,7 @@
 
 /* Overall Navbar styling */
 .navbar {
-    background-color: #112D4E;
+    background-color: #112d4e;
     padding: 0.5rem 0.5rem;
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@
     font-family: 'PT Sans', sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: #F9F7F7;
+    color: #f9f7f7;
     line-height: 1.5rem;
     text-decoration: none;
 }
@@ -24,7 +24,7 @@
     font-family: 'PT Sans', sans-serif;
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
-    color: #F9F7F7;
+    color: #f9f7f7;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -35,7 +35,7 @@
 }
 
 .navbar-nav .nav-link.active {
-    color: #3F72AF;
+    color: #3f72af;
 }
 
 .alert {
@@ -57,9 +57,9 @@
 }
 
 .btn-primary {
-    background-color: #7C93C3;
+    background-color: #7c93c3;
     font-family: 'PT Sans', sans-serif;
-    border-color: #7C93C3;
+    border-color: #7c93c3;
 }
 
 .btn-primary:hover {
@@ -67,10 +67,9 @@
     border-color: #19385c;
 }
 
-
 .btn-success {
-    background-color: #55679C;
-    border-color: #55679C;
+    background-color: #55679c;
+    border-color: #55679c;
     color: white;
 }
 
@@ -93,8 +92,8 @@
 }
 
 .btn-info {
-    background-color: #55679C;
-    border-color: #55679C;
+    background-color: #55679c;
+    border-color: #55679c;
     color: white;
 }
 
@@ -105,7 +104,12 @@
 }
 
 /* Styles for text elements */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'PT Sans', sans-serif;
     font-weight: bold;
     color: #4563a2;
@@ -117,7 +121,7 @@ body {
 
 footer {
     background-color: #0b1026;
-    color: #F9F7F7; 
+    color: #f9f7f7;
     padding: 0;
     text-align: center;
     font-family: 'PT Sans', sans-serif;
@@ -142,7 +146,6 @@ footer {
     opacity: 0.95;
 }
 
-
 .alert-success {
     background-color: rgba(124, 147, 195, 0.85);
     color: white;
@@ -155,7 +158,6 @@ footer {
     border: none;
 }
 
-
 .alert .btn-close {
     filter: invert(1);
 }
@@ -165,6 +167,12 @@ footer {
     flex-grow: 1;
 }
 
+.fade-out {
+    animation: fadeOut 1s forwards;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -172,15 +180,6 @@ footer {
     to {
         opacity: 0;
     }
-}
-
-.fade-out {
-    animation: fadeOut 1s forwards;
-}
-
-.fade-out {
-    opacity: 0;
-    transition: opacity 1s ease-out;
 }
 
 /* Mobile Styles: Adjust card margins for small screens */

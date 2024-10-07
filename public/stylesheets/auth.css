@@ -1,6 +1,5 @@
-/* Styles for background, form overlay, and button customization with hover effects */​⬤
-
-body {
+/* Styles for background, form overlay, and button customization with hover effects */
+​⬤ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,13 +29,15 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-login, .btn-register {
+.btn-login,
+.btn-register {
     background-color: #31447c;
     border-color: #31447c;
     color: white;
 }
 
-.btn-login:hover, .btn-register:hover {
+.btn-login:hover,
+.btn-register:hover {
     background-color: #19385c;
     border-color: #19385c;
 }
