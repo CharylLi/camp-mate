@@ -1,47 +1,49 @@
+/* This defines the overall layout and styling for the website, 
+   including the navbar, buttons, alerts, and general components. It applies 
+   consistent colors, fonts, and behaviors across the website. */
+
 /* Overall Navbar styling */
 .navbar {
     background-color: #112D4E;
     padding: 0.5rem 0.5rem;
     display: flex;
-    align-items: center;  /* Vertically center items */
+    align-items: center;
 }
 
-/* Navbar brand - make CampMate link back to the homepage */
 .navbar-brand {
     font-family: 'PT Sans', sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
     color: #F9F7F7;
     line-height: 1.5rem;
-    text-decoration: none;  /* Remove underline from CampMate link */
+    text-decoration: none;
 }
 
 /* Navbar link styling */
 .navbar-nav .nav-link {
     font-family: 'PT Sans', sans-serif;
     font-size: 1.1rem;
-    padding: 0.5rem 1rem;  /* Add more left margin */
+    padding: 0.5rem 1rem;
     color: #F9F7F7;
     display: flex;
-    align-items: center;  /* Vertically center the text in links */
-    text-decoration: none;  /* Remove underline */
+    align-items: center;
+    text-decoration: none;
 }
 
-/* Navbar link hover effects (no underline) */
 .navbar-nav .nav-link:hover {
-    color: #ffffff;  /* Color change on hover */
+    color: #ffffff;
 }
 
-/* Active link styling (no underline) */
 .navbar-nav .nav-link.active {
     color: #3F72AF;
 }
 
 .alert {
-    display: block !important;  /* 确保 alert 是可见的 */
+    display: block !important;
     visibility: visible !important;
 }
 
+/* Button styling and hover effects */
 .btn-search {
     background-color: #31447c;
     border-color: #31447c;
@@ -49,12 +51,11 @@
 }
 
 .btn-search:hover {
-    background-color: #19385c; /* 鼠标悬停时的颜色 */
+    background-color: #19385c;
     border-color: #19385c;
     color: white;
 }
 
-/* Button colors */
 .btn-primary {
     background-color: #7C93C3;
     font-family: 'PT Sans', sans-serif;
@@ -66,52 +67,48 @@
     border-color: #19385c;
 }
 
-/* Default success button styling */
+
 .btn-success {
     background-color: #55679C;
     border-color: #55679C;
     color: white;
 }
 
-/* Hover effect for success button */
 .btn-success:hover {
     background-color: #394a7d;
     border-color: #394a7d;
     color: white;
 }
 
-/* Default danger button styling */
 .btn-danger {
     background-color: #31447c;
     border-color: #31447c;
     color: white;
 }
 
-/* Hover effect for danger button */
 .btn-danger:hover {
     background-color: #19385c;
     border-color: #19385c;
     color: white;
 }
 
-/* Default info button styling */
 .btn-info {
     background-color: #55679C;
     border-color: #55679C;
     color: white;
 }
 
-/* Hover effect for info button */
 .btn-info:hover {
     background-color: #394a7d;
     border-color: #394a7d;
     color: white;
 }
 
+/* Styles for text elements */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'PT Sans', sans-serif;
     font-weight: bold;
-    color: #4563a2;  /* Apply medium blue to headings */
+    color: #4563a2;
 }
 
 body {
@@ -119,54 +116,55 @@ body {
 }
 
 footer {
-    background-color: #0b1026;  /* Dark blue */
-    color: #F9F7F7;  /* Light background color */
-    padding: 0;  /* Remove default padding */
+    background-color: #0b1026;
+    color: #F9F7F7; 
+    padding: 0;
     text-align: center;
     font-family: 'PT Sans', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;  /* Vertically center text in the footer */
-    height: 40px;  /* Set a consistent height for the footer */
+    align-items: center;
+    height: 40px;
 }
 
-#map {
-    flex-grow: 1; /* Make the map grow to fill the remaining space */
-}
-
+/* Defines the appearance and animation of alerts */
 .alert-custom {
     position: fixed;
-    top: 50px; /* 调整位置到页面稍微靠下 */
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1050;
-    width: 90%; /* 调整为更宽 */
-    max-width: 800px; /* 更大的最大宽度 */
+    width: 90%;
+    max-width: 800px;
     margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    opacity: 0.95; /* 降低透明度 */
+    opacity: 0.95;
 }
 
-/* 修改颜色 */
+
 .alert-success {
-    background-color: rgba(124, 147, 195, 0.85); /* 设置背景颜色和透明度 */
+    background-color: rgba(124, 147, 195, 0.85);
     color: white;
     border: none;
 }
 
 .alert-danger {
-    background-color: rgba(49, 68, 124, 0.85); /* 设置背景颜色和透明度 */
+    background-color: rgba(49, 68, 124, 0.85);
     color: white;
     border: none;
 }
 
-/* 使关闭按钮与配色方案匹配 */
+
 .alert .btn-close {
-    filter: invert(1); /* 将关闭按钮的颜色设置为白色 */
+    filter: invert(1);
 }
 
-/* 淡出效果 */
+/* Map size and fade-out animation for alerts */
+#map {
+    flex-grow: 1;
+}
+
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -176,17 +174,16 @@ footer {
     }
 }
 
-/* 当添加 fade-out 类时，启动动画 */
 .fade-out {
-    animation: fadeOut 1s forwards; /* 1秒的淡出动画 */
+    animation: fadeOut 1s forwards;
 }
 
-/* 让元素在隐藏后不占空间 */
 .fade-out {
     opacity: 0;
     transition: opacity 1s ease-out;
 }
 
+/* Mobile Styles: Adjust card margins for small screens */
 @media (max-width: 576px) {
     .card {
         margin-left: 10px !important;

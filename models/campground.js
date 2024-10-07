@@ -1,3 +1,6 @@
+// This schema defines the structure of the Campground model in the MongoDB database using Mongoose.
+// It includes fields and a virtual property for generating image thumbnails and a post-middleware 
+// hook for deleting reviews when a campground is deleted.
 const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
@@ -7,6 +10,7 @@ const ImageSchema = new Schema({
     filename: String
 });
 
+// Generates a smaller thumbnail version of the image URL.
 ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });
@@ -49,6 +53,7 @@ const CampgroundSchema = new Schema({
     }
 });
 
+// After a campground is deleted, this hook deletes all associated reviews.
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
         await Review.deleteMany({
@@ -58,4 +63,5 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
         })
     }
 });
+
 module.exports = mongoose.model('Campground', CampgroundSchema);

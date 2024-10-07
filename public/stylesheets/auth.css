@@ -1,40 +1,35 @@
-/* 设置背景图片 */
+/* Styles for background, form overlay, and button customization with hover effects */​⬤
+
 body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-    /* 确保背景图覆盖整个视窗 */
     position: relative;
 }
 
-/* 创建一个半透明的覆盖层 */
 .background-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 50% 透明度的黑色 */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 0;
 }
 
-/* 包裹登录表单和注册表单，确保它们在覆盖层上方 */
 .card-container {
     position: relative;
     z-index: 1;
-    /* 确保登录表单位于背景层的上方 */
 }
 
-/* 设置半透明背景色的覆盖层 */
 .overlay {
-    background-color: rgba(255, 255, 255, 0.7); /* 调整为70%不透明 */
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 自定义按钮样式 */
 .btn-login, .btn-register {
     background-color: #31447c;
     border-color: #31447c;

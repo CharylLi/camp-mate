@@ -1,3 +1,6 @@
+/* This stylesheet configures a star rating system using custom CSS for visual representation of rating stars.
+   The code handles different star states, hover effects, and ratings display. It is adapted from an online resource. */
+
 .starability-result {
     position: relative;
     width: 150px;

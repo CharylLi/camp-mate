@@ -1,3 +1,4 @@
+// This schema defines the structure of the Review model in the MongoDB database using Mongoose.
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

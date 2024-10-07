@@ -1,25 +1,27 @@
+// This file contains the controller logic for handling campgrounds, 
+// including creating, editing, deleting, and showing campgrounds, 
+// as well as handling geocoding, image uploads, sorting, and filtering features.
+
 const Campground = require('../models/campground');
 const { cloudinary } = require("../cloudinary");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
-
+// List all campgrounds with optional search and sorting.
 module.exports.index = async (req, res) => {
     const { search, sort } = req.query;
     let campgrounds = await Campground.find({});
 
-    // Handle search by title or location
     if (search) {
         campgrounds = await Campground.find({
             $or: [
-                { title: new RegExp(search, 'i') },  // Search by title (case-insensitive)
-                { location: new RegExp(search, 'i') }  // Search by location (case-insensitive)
+                { title: new RegExp(search, 'i') },
+                { location: new RegExp(search, 'i') }
             ]
         });
     }
 
-    // Handle sorting
     if (sort === 'alphabetic') {
         campgrounds = campgrounds.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sort === 'most-reviews') {
@@ -35,10 +37,12 @@ module.exports.index = async (req, res) => {
     res.render('campgrounds/index', { campgrounds, search, sort });
 };
 
+// Render form to create new campground.
 module.exports.renderNewForm = (req, res) => {
     res.render('campgrounds/new');
 }
 
+// Render the map view of all campgrounds.
 module.exports.renderMap = async (req, res) => {
     try {
         const campgrounds = await Campground.find({});
@@ -49,50 +53,40 @@ module.exports.renderMap = async (req, res) => {
         return res.redirect('/campgrounds');
     }
 }
-
+// Create a new campground and save it to the database.
 module.exports.createCampground = async (req, res, next) => {
     try {
-        // Use the location input from the form
+        // Use the location from the form to fetch geocoding data from Mapbox API.
         const location = req.body.campground.location;
-
-        // Make a request to the Mapbox Geocoding API
         const geoData = await geocoder.forwardGeocode({
-            query: location,  // Pass the location from the form
-            limit: 1  // We only want the first result
+            query: location,
+            limit: 1
         }).send();
 
-        // Check if Mapbox returns valid geometry
+        // Handle cases where the geocoding returns no valid result.
         if (!geoData.body.features.length) {
             req.flash('error', 'Invalid location. Please provide a valid location.');
             return res.redirect('back');
         }
 
-        // Log the response from Mapbox to see what is being returned
-        console.log('Geocoding data:', geoData.body.features[0].geometry);
-
-        // Create a new campground with the form data and set the geometry field from Mapbox
+        // Create a new campground object.
         const campground = new Campground(req.body.campground);
         campground.geometry = geoData.body.features[0].geometry;
-
-        // Add images, website, and author
         campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
         campground.author = req.user._id;
-        campground.website = req.body.campground.website;  // Add website from the form
-
-        // Save the campground to the database
+        campground.website = req.body.campground.website;
         await campground.save();
 
-        // Redirect and show success message
         req.flash('success', 'Successfully created a new campground!');
         res.redirect(`/campgrounds/${campground._id}`);
     } catch (error) {
-        // Handle errors
         console.error('Error creating campground:', error);
         req.flash('error', 'Something went wrong, please try again.');
         res.redirect('back');
     }
 };
 
+// Show details of a single campground.
 module.exports.showCampground = async (req, res,) => {
     const campground = await Campground.findById(req.params.id).populate({
         path: 'reviews',
@@ -107,6 +101,7 @@ module.exports.showCampground = async (req, res,) => {
     res.render('campgrounds/show', { campground });
 }
 
+// Render the form to edit an existing campground.
 module.exports.renderEditForm = async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById(id);
@@ -117,21 +112,16 @@ module.exports.renderEditForm = async (req, res) => {
     res.render('campgrounds/edit', { campground });
 }
 
+// Update an existing campground.
 module.exports.updateCampground = async (req, res) => {
     const { id } = req.params;
-    console.log(req.body);
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
-
-    // Handle image uploads
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.images.push(...imgs);
-
-    // Update website
-    campground.website = req.body.campground.website;  // Update the website field
+    campground.website = req.body.campground.website;
 
     await campground.save();
 
-    // Handle image deletions
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
             await cloudinary.uploader.destroy(filename);
@@ -143,6 +133,7 @@ module.exports.updateCampground = async (req, res) => {
     res.redirect(`/campgrounds/${campground._id}`);
 };
 
+// Delete an existing campground.
 module.exports.deleteCampground = async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);

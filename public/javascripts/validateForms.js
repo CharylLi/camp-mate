@@ -1,8 +1,7 @@
-// const { default: bsCustomFileInput } = require("bs-custom-file-input");
-
+// Adds client-side form validation to all forms with class 'validated-form'. 
+// Prevents submission if invalid, and adds Bootstrap's 'was-validated' class for validation styling.
 (function () {
     'use strict';
-    // bsCustomFileInput.init()
 
     window.addEventListener('load', function () {
         const forms = document.getElementsByClassName('validated-form');
