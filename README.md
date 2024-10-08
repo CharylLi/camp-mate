@@ -14,9 +14,9 @@ CampMate is a full-stack web application where users can create, review, and man
 
     -   Logged-in users can create new campgrounds. Users can edit or delete only the campgrounds they created. Each campground includes a title, location, description, price, images, and a location displayed on an interactive map using **Mapbox**.
 
--   **Leave, Edit, and Delete Reviews**:
+-   **Leave, and Delete Reviews**:
 
-    -   Logged-in users can leave reviews on campgrounds, as well as edit or delete their own reviews. Each review includes a rating (1-5) and a text body.
+    -   Logged-in users can leave reviews on campgrounds, as well as delete their own reviews. Each review includes a rating (1-5) and a text body.
 
 -   **Persistent Data Storage**:
 
@@ -38,12 +38,19 @@ CampMate is a full-stack web application where users can create, review, and man
 ### Front-End
 
 -   **HTML5**:
+
     -   Provides the structure and content of the website.
+
 -   **CSS3**:
+
     -   Used for styling and layout of web pages.
+
 -   **Bootstrap**:
+
     -   A popular front-end framework used for building responsive, mobile-first designs.
+
 -   **JavaScript (jQuery)**:
+
     -   Handles dynamic content, interactivity, and DOM manipulation for a smooth user experience.
 
 ### Back-End
@@ -65,6 +72,7 @@ CampMate is a full-stack web application where users can create, review, and man
     -   Middleware used for authentication, enabling users to register, log in, and manage sessions.
 
 -   **EJS (Embedded JavaScript)**:
+
     -   Templating engine used for rendering dynamic HTML pages on the server-side.
 
 ### API & Other Integrations
@@ -82,6 +90,7 @@ CampMate is a full-stack web application where users can create, review, and man
     -   MongoDB Atlas is hosted on **AWS EC2** instances to ensure secure and reliable database hosting.
 
 -   **RESTful API**:
+
     -   The app uses RESTful routing to manage CRUD operations for campgrounds and reviews, allowing users to interact with resources through standardized HTTP methods.
 
 ## Project Structure
